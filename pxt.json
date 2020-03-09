@@ -1,0 +1,24 @@
+{
+    "name": "Home Sweet Home",
+    "description": "",
+    "dependencies": {
+        "device": "*",
+        "controller": "*",
+        "darts": "*",
+        "color-coded-tilemap": "*",
+        "animation": "*",
+        "storyboard": "*"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "supportedTargets": [
+        "arcade"
+    ],
+    "preferredEditor": "blocksprj"
+}
