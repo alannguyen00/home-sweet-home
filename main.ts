@@ -106,7 +106,7 @@ function main_character () {
 . . . . f f f . f f f . . . . . . 
 `, SpriteKind.Player)
     // This moves my sprite
-    controller.moveSprite(Carlos, 200, 200)
+    controller.moveSprite(Carlos, 65, 65)
     // This set's my sprite's postion/spawn point
     Carlos.setPosition(400, 750)
     Carlos.setKind(SpriteKind.Player)
