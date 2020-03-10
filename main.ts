@@ -3,6 +3,10 @@ namespace SpriteKind {
     export const key2 = SpriteKind.create()
     export const key3 = SpriteKind.create()
     export const portal = SpriteKind.create()
+    export const key4 = SpriteKind.create()
+    export const key5 = SpriteKind.create()
+    export const key6 = SpriteKind.create()
+    export const set1 = SpriteKind.create()
 }
 namespace myTiles {
     //% blockIdentity=images._tile
@@ -76,8 +80,8 @@ function bad_guy () {
 . . . . . . 8 8 . . 8 8 . . . . . 
 . . . . . f f f . . f f f . . . . 
 `, SpriteKind.Player)
-    Villan.setPosition(400, 600)
-    Villan.follow(Carlos, 60)
+    Villan.setPosition(400, 825)
+    Villan.follow(Carlos, 75)
     Villan.setKind(SpriteKind.Enemy)
 }
 function main_character () {
@@ -108,6 +112,9 @@ function main_character () {
     Carlos.setKind(SpriteKind.Player)
     // This follows the sprite
     scene.cameraFollowSprite(Carlos)
+}
+function level_3 () {
+	
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     // This organizes the amount of animations
@@ -296,12 +303,40 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+function Key6 () {
+    kay_6 = sprites.create(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . 1 . . . . 1 1 . . . 
+. . . . . . 1 1 . . 1 1 . . . . 
+. . . 1 1 . . . . . . . . 1 . . 
+. . . . 1 1 . . . . . . 1 1 . . 
+. . . . . . 5 . . . . . . . . . 
+. 1 1 . . 5 . 5 5 5 5 . . . . . 
+. . . . . . 5 . . . 5 . . . . . 
+. . . . . . . . . . . . 1 . . . 
+. . . 1 . . . . . . . . . 1 . . 
+. . 1 1 . . . . . . . . . . 1 . 
+. 1 1 . . . . 1 1 . . . . . . . 
+. . . . . . . . . 1 1 . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, SpriteKind.Food)
+    kay_6.setPosition(75, 600)
+    kay_6.say("Key 6")
+    kay_6.setKind(SpriteKind.key6)
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.key2, function (sprite, otherSprite) {
     info.changeScoreBy(1)
     kays_2.destroy()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.key5, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    kay_5.destroy()
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.portal, function (sprite, otherSprite) {
     level += 1
+    Carlos.say("Where am I ?", 1000)
 })
 function background () {
     // This creates the whole map.
@@ -402,7 +437,7 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
     info.changeLifeBy(-1)
     Carlos.destroy()
     main_character()
-    Villan.follow(Carlos, 100)
+    Villan.follow(Carlos, 80)
 })
 // This function creates the 1/3 keys and positions
 // them in 3 specific places.
@@ -490,24 +525,33 @@ f f f f f f f 1 f f f f f f f f f f f f f f 1 f 1 f f f f f f f f f 1 f f f f f 
 f f f f f f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f 1 1 1 1 1 1 1 1 1 1 1 f f f f f f f f f f f f f f f 
 `)
     scene.setTile(1, img`
-f f f 1 1 1 f f f 1 1 1 f f f 1 
-f f f 1 1 1 f f f 1 1 1 f f f 1 
-f f f 1 1 1 f f f 1 1 1 f f f 1 
-1 1 1 f f f 1 1 1 f f f 1 1 1 f 
-1 1 1 f f f 1 1 1 f f f 1 1 1 f 
-1 1 1 f f f 1 1 1 f f f 1 1 1 f 
-f f f 1 1 1 f f f 1 1 1 f f f 1 
-f f f 1 1 1 f f f 1 1 1 f f f 1 
-f f f 1 1 1 f f f 1 1 1 f f f 1 
-1 1 1 f f f 1 1 1 f f f 1 1 1 f 
-1 1 1 f f f 1 1 1 f f f 1 1 1 f 
-1 1 1 f f f 1 1 1 f f f 1 1 1 f 
-f f f 1 1 1 f f f 1 1 1 f f f 1 
-f f f 1 1 1 f f f 1 1 1 f f f 1 
-f f f 1 1 1 f f f 1 1 1 f f f 1 
-1 1 1 f f f 1 1 1 f f f 1 1 1 f 
+f f f 2 2 2 f f f 2 2 2 f f f 2 
+f f f 2 2 2 f f f 2 2 2 f f f 2 
+f f f 2 2 2 f f f 2 2 2 f f f 2 
+2 2 2 f f f 2 2 2 f f f 2 2 2 f 
+2 2 2 f f f 2 2 2 f f f 2 2 2 f 
+2 2 2 f f f 2 2 2 f f f 2 2 2 f 
+f f f 2 2 2 f f f 2 2 2 f f f 2 
+f f f 2 2 2 f f f 2 2 2 f f f 2 
+f f f 2 2 2 f f f 2 2 2 f f f 2 
+2 2 2 f f f 2 2 2 f f f 2 2 2 f 
+2 2 2 f f f 2 2 2 f f f 2 2 2 f 
+2 2 2 f f f 2 2 2 f f f 2 2 2 f 
+f f f 2 2 2 f f f 2 2 2 f f f 2 
+f f f 2 2 2 f f f 2 2 2 f f f 2 
+f f f 2 2 2 f f f 2 2 2 f f f 2 
+2 2 2 f f f 2 2 2 f f f 2 2 2 f 
 `, true)
+    game.splash("Now entering: The future", "")
+    key_4()
+    Key6()
+    Key5()
+    Villan.follow(Carlos, 85)
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.key4, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    kay_4.destroy()
+})
 function key_2 () {
     kays_2 = sprites.create(img`
 . . . . . . . . . . . . . . . . 
@@ -755,6 +799,38 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+function key_4 () {
+    kay_4 = sprites.create(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . 1 . . . . 1 1 . . . 
+. . . . . . 1 1 . . 1 1 . . . . 
+. . . 1 1 . . . . . . . . 1 . . 
+. . . . 1 1 . . . . . . 1 1 . . 
+. . . . . . 5 . . . . . . . . . 
+. 1 1 . . 5 . 5 5 5 5 . . . . . 
+. . . . . . 5 . . . 5 . . . . . 
+. . . . . . . . . . . . 1 . . . 
+. . . 1 . . . . . . . . . 1 . . 
+. . 1 1 . . . . . . . . . . 1 . 
+. 1 1 . . . . 1 1 . . . . . . . 
+. . . . . . . . . 1 1 . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, SpriteKind.Food)
+    kay_4.setPosition(470, 625)
+    kay_4.say("Key 4")
+    kay_4.setKind(SpriteKind.key4)
+}
+function access_to_level_3 () {
+    if (info.score() == 6) {
+    	
+    }
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.key6, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    kay_6.destroy()
+})
 function Portal () {
     portall = sprites.create(img`
 . . . . f f f f f f f f f f f f f . . . 
@@ -902,9 +978,35 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+function Key5 () {
+    kay_5 = sprites.create(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . 1 . . . . 1 1 . . . 
+. . . . . . 1 1 . . 1 1 . . . . 
+. . . 1 1 . . . . . . . . 1 . . 
+. . . . 1 1 . . . . . . 1 1 . . 
+. . . . . . 5 . . . . . . . . . 
+. 1 1 . . 5 . 5 5 5 5 . . . . . 
+. . . . . . 5 . . . 5 . . . . . 
+. . . . . . . . . . . . 1 . . . 
+. . . 1 . . . . . . . . . 1 . . 
+. . 1 1 . . . . . . . . . . 1 . 
+. 1 1 . . . . 1 1 . . . . . . . 
+. . . . . . . . . 1 1 . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, SpriteKind.Food)
+    kay_5.setPosition(475, 700)
+    kay_5.say("Key 5")
+    kay_5.setKind(SpriteKind.key5)
+}
 let portall: Sprite = null
+let kay_4: Sprite = null
 let kays: Sprite = null
+let kay_5: Sprite = null
 let kays_2: Sprite = null
+let kay_6: Sprite = null
 let Carlos: Sprite = null
 let Villan: Sprite = null
 let kay_3: Sprite = null
@@ -925,13 +1027,8 @@ Portal()
 game.onUpdate(function () {
     if (level == 2) {
         lEvel_2()
-        light.showAnimation(light.rainbowAnimation, 5000)
     }
 })
 game.onUpdate(function () {
     Key_unlocks()
-})
-forever(function () {
-    // This will play the background music forever.
-    music.playMelody("E B C5 A B G A F ", 120)
 })
