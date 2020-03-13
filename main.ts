@@ -53,26 +53,8 @@ e e e e e e e e e e e e e e e e
 e e e e e e e e e e e e e f e e 
 `
 }
-function beginning_credits () {
-    game.splash("You have been brought back to the past.  ")
-    game.splash("Navigate your way through 4 levels for the 12 keys and escape back to the present! ")
-    game.splash("The first 3 keys are located throughout this first map.")
-    game.splash("One on the left and two on the right", "")
-    game.splash("Use ^ to move up, S to move down, and < and > to move Left and Right. ")
-    game.splash("Beware, you're not the only one here...")
-    game.splash("Beware, you're not the only one here...")
-    game.splash("Level 1 is the past where you will get pins for a future award to the alternate future universe.")
-    game.splash("Level 2 the alternate future where you will attempt to gather the next 3 keys to unlock the business award which will transport you to the fake present, but not your home.")
-    game.splash("Level 3 is where you will attempt to escape he building in the present. Beating this level will get you the leader award and will unlock one last portal to your home where you will attempt to get the next keys for the america award.")
-    game.splash("Level 3 is where you will attempt to escape he building in the present. Beating this level will get you the america award and will unlock one last portal to your home where you will attempt to clean up your room to get the america award.")
-    game.splash("In Level 4, you will make one last run through a maze to finally make it back to the real world and home.")
-}
-sprites.onOverlap(SpriteKind.Player, SpriteKind.key8, function (sprite, otherSprite) {
-    info.changeScoreBy(1)
-    kay_8.destroy()
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.portal2, function (sprite, otherSprite) {
-    level_changer()
+sprites.onOverlap(SpriteKind.Player, SpriteKind.portal3, function (sprite, otherSprite) {
+    level_changer_2()
 })
 function key_8 () {
     kay_8 = sprites.create(img`
@@ -97,6 +79,24 @@ function key_8 () {
     kay_8.say("Key 8")
     kay_8.setKind(SpriteKind.key8)
 }
+function beginning_credits () {
+    game.splash("You have been brought back to the past.  ")
+    game.splash("Navigate your way through 4 levels for the 12 keys and escape back to the present! ")
+    game.splash("The first 3 keys are located throughout this first map.")
+    game.splash("One on the left and two on the right", "")
+    game.splash("Use ^ to move up, S to move down, and < and > to move Left and Right. ")
+    game.splash("Beware, you're not the only one here...")
+    game.splash("Beware, you're not the only one here...")
+    game.splash("Level 1 is the past where you will get pins for a future award to the alternate future universe.")
+    game.splash("Level 2 the alternate future where you will attempt to gather the next 3 keys to unlock the business award which will transport you to the fake present, but not your home.")
+    game.splash("Level 3 is where you will attempt to escape he building in the present. Beating this level will get you the leader award and will unlock one last portal to your home where you will attempt to get the next keys for the america award.")
+    game.splash("Level 3 is where you will attempt to escape he building in the present. Beating this level will get you the america award and will unlock one last portal to your home where you will attempt to clean up your room to get the america award.")
+    game.splash("In Level 4, you will make one last run through a maze to finally make it back to the real world and home.")
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.key8, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    kay_8.destroy()
+})
 function portal_3 () {
     portal3 = sprites.create(img`
 . . . . f f f f f a a a a f f f f . . . 
@@ -123,34 +123,99 @@ function portal_3 () {
     portal3.setPosition(175, 300)
     portal3.setKind(SpriteKind.portal3)
 }
-function level_changer_2 () {
-    if (info.score() == 9) {
-        level += 1
-    }
+function level4 () {
+    scene.setTileMap(img`
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
+f f f f f f f f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f f f 
+f f f f f f f f 7 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 7 f f 
+f f f f f f f f 7 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 f f 
+f f f f f f f f 7 . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 . . . . . . . . . . . . 7 f f 
+f f f f f f f f 7 . . 7 f f f f f f f f f f f f f f f f f f f f f f 7 7 7 7 7 . . . . . . . . 7 f f 
+f f f f f f f f 7 . . 7 f f f f f f f f f f f f f f f f f f f f f f f f f f 7 . . . . . . . 7 7 f f 
+f f f f f f f f 7 . . 7 f f f f f f f f f f f f f f f f f f f f f f f f f f 7 7 . . . . . . 7 f f f 
+f f 7 7 7 7 7 7 7 . . 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f f f f f f f f f f f f f 7 . . . . . 7 7 f f f 
+f f 7 . . . . . . . . . . . . . . . . . . . . . . 7 f f f f f 7 7 7 7 f f f f 7 7 . . . . 7 f f f f 
+f f 7 . . . . . . . . . . . . . . . . . . . . . . 7 f f f f f 7 . . 7 f f f f f 7 . . 7 7 7 f f f f 
+f f 7 7 7 7 7 7 7 . . 7 7 7 7 7 7 7 7 7 7 7 7 . . 7 f f f f f 7 . . 7 f f f f f 7 . . 7 7 f f f f f 
+f f f f f f f f 7 . . 7 f f f f f f f f f f 7 . . 7 f f f f f 7 . . 7 f f f f f 7 . . 7 f f f f f f 
+f f f f f f f f 7 . . 7 f f f f f f f f f f 7 . . 7 f f f f f 7 . . 7 f f f f f 7 . . 7 f f f f f f 
+f f f f f f 7 7 7 . . 7 7 7 f f f f f f f f 7 . . 7 f f f f f 7 . . 7 f f f f f 7 . . 7 f f f f f f 
+f f f f f f 7 . . . . . . 7 7 7 7 7 7 7 7 7 7 . . 7 7 7 7 7 7 7 . . 7 7 7 7 7 7 7 . . 7 7 7 7 7 7 f 
+f f f f f f 7 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 f 
+f f 7 7 7 7 7 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 7 f 
+f f 7 . . . . . . . . . . 7 7 7 7 7 7 7 . . . 7 7 7 7 7 7 7 7 7 . . 7 7 7 7 7 7 7 . . 7 7 7 7 7 7 f 
+f f 7 . . . . . . . . . . 7 f f f f f 7 . . . 7 f f f f f f f 7 . . 7 f f f f f 7 . . 7 f f f f f f 
+f f 7 . . 7 7 7 7 . . . 7 7 f f f f f 7 . . . 7 f f f f f f f 7 . . 7 f f f f 7 7 . . 7 7 7 7 7 f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f 7 . . . 7 f f f f f f f 7 . . 7 f f f f 7 . . . . . . . 7 f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f 7 . . . 7 f f f f f f f 7 . . 7 f f f f 7 . . . . . . . 7 f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f 7 . . . 7 f f f f f f f 7 . . 7 f f f 7 7 . . . . . . . 7 f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f 7 . . . 7 f f f f f f f 7 . . 7 f f f 7 . . . . . . . . 7 f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f 7 . . . 7 f f f f f f f 7 . . 7 f f f 7 . . . . . . . . 7 f f 
+f f 7 . . 7 f f 7 . . . 7 7 7 7 7 7 7 7 . . . 7 7 7 7 7 f f f 7 . . 7 f f 7 . . . . . . . . . 7 f f 
+f f 7 . . 7 f f 7 . . . . . . . . . . . . . . . . . . 7 f f f 7 . . 7 f f 7 . . . . . . . . . 7 f f 
+f f 7 . . 7 f f 7 . . . . . . . . . . . . . . . . . . 7 f f f 7 . . 7 f f 7 . . . . . . . . 7 7 f f 
+f f 7 . . 7 f f 7 . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 . . 7 f f f 7 . . 7 f f 7 . . . . . . . . 7 f f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f f f f f f 7 . . 7 f f f 7 . . 7 f f 7 . . . . . . . 7 7 f f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f f f f f f 7 . . 7 f f f 7 . . 7 f f 7 7 . . . . . . 7 f f f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f f f f f f 7 . . 7 f f f 7 . . 7 f f f 7 . . . . . 7 7 f f f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f f f f f f 7 . . 7 f f f 7 . . 7 f f f 7 . . . . . 7 f f f f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f f f f f f 7 . . 7 f f f 7 . . 7 f f f 7 7 . . . . 7 f f f f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f f f f f f 7 . . 7 f f f 7 . . 7 f f f f 7 . . . . 7 f f f f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f f f f f f 7 . . 7 f f f 7 . . 7 f f f 7 7 . . . . 7 f f f f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f f f f f f 7 . . 7 f f f 7 . . 7 f f f 7 . . . . . 7 f f f f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f f f f f f 7 . . 7 f f f 7 . . 7 f f f 7 . . . . . 7 7 f f f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f f f f f f 7 . . 7 f f f 7 . . 7 f f 7 7 . . . . . 7 7 f f f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f f f f f f 7 . . 7 f f f 7 . . 7 f f 7 . . . . . . . 7 7 f f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f f f f f f 7 . . 7 f f f 7 . . 7 f f 7 . . . . . . . . 7 f f f 
+f f 7 . . 7 f f 7 . . . 7 f f f f f f f f f f f 7 . . 7 f f f 7 . . 7 f f 7 . . . . . . . . 7 f f f 
+f f 7 . . 7 f f 7 . . . 7 7 7 7 7 7 7 7 7 7 7 7 7 . . 7 f f f 7 . . 7 f f 7 . . . . . . . . 7 f f f 
+f f 7 . . 7 f f 7 . . . . . . . . . . . . . . . . . . 7 f f f 7 . . 7 f f 7 . . . . . . . . 7 f f f 
+f f 7 . . 7 f f 7 . . . . . . . . . . . . . . . . . . 7 7 7 7 7 . . 7 f f 7 7 . . . . . . . 7 f f f 
+f f 7 7 7 7 f f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 . . . . . . . . . 7 f f f 7 7 7 7 . . . . 7 f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f 7 . . . . . . . . . 7 f f f f f f 7 7 7 7 7 7 f f f 
+f f f f f f f f f f f f f f f f f f f f f f f f 7 7 7 7 7 7 7 7 7 7 7 f f f f f f f f f f f f f f f 
+`)
+    scene.setTile(7, img`
+8 8 8 8 8 8 8 8 8 8 1 1 1 1 1 1 
+8 8 1 8 8 8 8 1 8 8 1 1 1 1 1 1 
+8 8 8 8 1 8 8 8 8 8 2 2 2 2 2 2 
+8 8 8 8 8 8 8 1 8 8 1 1 1 1 1 1 
+8 1 8 8 1 8 8 8 8 8 1 1 1 1 1 1 
+8 8 8 8 8 8 8 1 8 8 2 2 2 2 2 2 
+8 8 8 8 8 8 8 8 8 8 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+`, true)
+    scene.setTile(0, img`
+d d d 1 d d d d d d d 1 d d d d 
+d d d 1 d d d d d d d 1 d d d d 
+d d d 1 d d d d d d d 1 d d d d 
+d d d 1 d d d d d d d 1 d d d d 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+d d d 1 d d d d d d d 1 d d d d 
+d d d 1 d d d d d d d 1 d d d d 
+d d d 1 d d d d d d d 1 d d d d 
+d d d 1 d d d d d d d 1 d d d d 
+d d d 1 d d d d d d d 1 d d d d 
+d d d 1 d d d d d d d 1 d d d d 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+d d d 1 d d d d d d d 1 d d d d 
+d d d 1 d d d d d d d 1 d d d d 
+d d d 1 d d d d d d d 1 d d d d 
+d d d 1 d d d d d d d 1 d d d d 
+`, false)
 }
-function key_9 () {
-    kay_9 = sprites.create(img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . 1 . . . . 1 1 . . . 
-. . . . . . 1 1 . . 1 1 . . . . 
-. . . 1 1 . . . . . . . . 1 . . 
-. . . . 1 1 . . . . . . 1 1 . . 
-. . . . . . 5 . . . . . . . . . 
-. 1 1 . . 5 . 5 5 5 5 . . . . . 
-. . . . . . 5 . . . 5 . . . . . 
-. . . . . . . . . . . . 1 . . . 
-. . . 1 . . . . . . . . . 1 . . 
-. . 1 1 . . . . . . . . . . 1 . 
-. 1 1 . . . . 1 1 . . . . . . . 
-. . . . . . . . . 1 1 . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`, SpriteKind.Food)
-    kay_9.setPosition(345, 510)
-    kay_9.say("Key 9")
-    kay_9.setKind(SpriteKind.key9)
-}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.portal2, function (sprite, otherSprite) {
+    level_changer()
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.key3, function (sprite, otherSprite) {
     info.changeScoreBy(1)
     kay_3.destroy()
@@ -445,6 +510,29 @@ function Key6 () {
     kay_6.setPosition(75, 600)
     kay_6.say("Key 6")
     kay_6.setKind(SpriteKind.key6)
+}
+function key_9 () {
+    kay_9 = sprites.create(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . 1 . . . . 1 1 . . . 
+. . . . . . 1 1 . . 1 1 . . . . 
+. . . 1 1 . . . . . . . . 1 . . 
+. . . . 1 1 . . . . . . 1 1 . . 
+. . . . . . 5 . . . . . . . . . 
+. 1 1 . . 5 . 5 5 5 5 . . . . . 
+. . . . . . 5 . . . 5 . . . . . 
+. . . . . . . . . . . . 1 . . . 
+. . . 1 . . . . . . . . . 1 . . 
+. . 1 1 . . . . . . . . . . 1 . 
+. 1 1 . . . . 1 1 . . . . . . . 
+. . . . . . . . . 1 1 . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, SpriteKind.Food)
+    kay_9.setPosition(345, 530)
+    kay_9.say("Key 9")
+    kay_9.setKind(SpriteKind.key9)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.key2, function (sprite, otherSprite) {
     info.changeScoreBy(1)
@@ -796,6 +884,11 @@ function key_2 () {
     kays_2.setPosition(100, 550)
     kays_2.say("Key 2")
     kays_2.setKind(SpriteKind.key2)
+}
+function level_changer_2 () {
+    if (info.score() == 9) {
+        level += 1
+    }
 }
 function Key_unlocks () {
     // If the score is 3, the wall that was locked
@@ -1257,12 +1350,12 @@ let kays: Sprite = null
 let portall: Sprite = null
 let kay_5: Sprite = null
 let kays_2: Sprite = null
+let kay_9: Sprite = null
 let kay_6: Sprite = null
 let portall2: Sprite = null
 let Carlos: Sprite = null
 let Villan: Sprite = null
 let kay_3: Sprite = null
-let kay_9: Sprite = null
 let portal3: Sprite = null
 let kay_8: Sprite = null
 beginning_credits()
@@ -1289,7 +1382,7 @@ game.onUpdate(function () {
         level = 0
     }
     if (level == 4) {
-        key_4()
+        level4()
         level = 0
     }
 })
@@ -1297,4 +1390,7 @@ game.onUpdate(function () {
     // This will make the user be able to unlock the walls
     // by collecting the keys.
     Key_unlocks()
+})
+forever(function () {
+    music.playMelody("E B C5 A B G A D ", 240)
 })
